@@ -14,10 +14,42 @@
         android:padding="10dp"
         android:textSize="25sp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/call_chat_box"
+        android:layout_above="@+id/switch_layout"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/switch_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/call_chat_box"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I'm patient"
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/patient_24"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:layout_marginLeft="20dp"
+            android:onClick="patientRedirect"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I'm doctor"
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/nurse_24"
+            android:textSize="20sp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:paddingRight="19dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="doctorRedirect"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/call_chat_box"
@@ -26,7 +58,9 @@
         android:padding="10dp"
         android:background="#64000000"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
         <EditText
             android:id="@+id/chat_input"
@@ -36,7 +70,8 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:textColorHint="@color/white"
-            android:hint="Enter Message..."/>
+            android:hint="Enter Message..."
+            android:focusableInTouchMode="true"/>
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -62,7 +97,7 @@
         android:layout_width="wrap_content"
         android:minWidth="300dp"
         android:layout_alignParentEnd="true"
-        android:layout_above="@id/call_chat_box"
+        android:layout_above="@id/switch_layout"
         android:stackFromBottom="true"
         android:divider="@null"
         android:dividerHeight="0dp"

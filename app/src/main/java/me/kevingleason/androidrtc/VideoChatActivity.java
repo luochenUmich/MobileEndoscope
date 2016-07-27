@@ -1,9 +1,12 @@
 package me.kevingleason.androidrtc;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
@@ -234,6 +237,53 @@ public class VideoChatActivity extends ListActivity {
     private void endCall() {
         startActivity(new Intent(VideoChatActivity.this, MainActivity.class));
         finish();
+    }
+
+    public void patientRedirect(View view) {
+        final String IP_CAMERA_PACKAGE_NAME = "com.pas.webcam";
+        final PackageManager pm = getPackageManager();
+        Intent i = pm.getLaunchIntentForPackage(IP_CAMERA_PACKAGE_NAME);
+        if (i != null) {
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setAction("android.intent.action.VIEW");
+            startActivity(i);
+            Log.d("PatientSwitch", "Success");
+        } else {
+            Toast.makeText(VideoChatActivity.this, "IP Camera is not installed", Toast.LENGTH_SHORT);
+        }
+//        //get a list of installed apps.
+//        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+//
+//        for (ApplicationInfo packageInfo : packages) {
+//            Log.d("packageName", packageInfo.packageName);
+//            Log.d("appName", (String)pm.getApplicationLabel(packageInfo));
+//        }
+
+//        // redirect app to IP Camera
+//        ActivityManager am = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+//        for(ActivityManager.RunningTaskInfo t: am.getRunningTasks(30)){
+//            String packageName = t.topActivity.getPackageName();
+//            Log.d("packageName: ", packageName);
+//            String className = t.topActivity.getClassName();
+//            Log.d("className: ", className);
+//        }
+//        Intent intent = new Intent();
+//        intent.setClassName()
+    }
+
+    public void doctorRedirect(View view) {
+        final String IVIDEON_PACKAGE_NAME = "com.ivideon.client";
+        final PackageManager pm = getPackageManager();
+        Intent i = pm.getLaunchIntentForPackage(IVIDEON_PACKAGE_NAME);
+
+        if (i != null) {
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setAction("android.intent.action.VIEW");
+            startActivity(i);
+            Log.d("doctorSwitch", "Success");
+        } else {
+            Toast.makeText(VideoChatActivity.this, "Ivideon is not installed", Toast.LENGTH_SHORT);
+        }
     }
 
 

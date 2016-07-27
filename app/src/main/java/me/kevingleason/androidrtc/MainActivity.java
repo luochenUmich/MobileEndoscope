@@ -3,6 +3,7 @@ package me.kevingleason.androidrtc;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -183,6 +184,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void successCallback(String channel, Object message) {
                 Log.d("MA-dC", "HERE_NOW: " +" CH - " + callNumStdBy + " " + message.toString());
+                Log.d("Camera number: ", Integer.toString(Camera.getNumberOfCameras()));
                 try {
                     int occupancy = ((JSONObject) message).getInt(Constants.JSON_OCCUPANCY);
                     if (occupancy == 0) {
