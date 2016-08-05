@@ -241,8 +241,12 @@ public class VideoChatActivity extends ListActivity {
 
     public void patientRedirect(View view) {
         final String IP_CAMERA_PACKAGE_NAME = "com.pas.webcam";
+        final String IP_CAMERA_PRO_NAME = "com.pas.webcam.pro";
+
         final PackageManager pm = getPackageManager();
-        Intent i = pm.getLaunchIntentForPackage(IP_CAMERA_PACKAGE_NAME);
+        Intent i = pm.getLaunchIntentForPackage(IP_CAMERA_PRO_NAME);
+        if (i == null)
+            i = pm.getLaunchIntentForPackage(IP_CAMERA_PACKAGE_NAME);
         if (i != null) {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.setAction("android.intent.action.VIEW");
@@ -251,6 +255,7 @@ public class VideoChatActivity extends ListActivity {
         } else {
             Toast.makeText(VideoChatActivity.this, "IP Camera is not installed", Toast.LENGTH_SHORT);
         }
+
 //        //get a list of installed apps.
 //        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 //
